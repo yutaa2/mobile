@@ -1,0 +1,139 @@
+package com.example.myapplication;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        EditText n1 = findViewById(R.id.num1);
+        EditText n2 = findViewById(R.id.num2);
+        EditText r = findViewById(R.id.res);
+        Button add = findViewById(R.id.but1);
+        Button sub = findViewById(R.id.but2);
+        Button mul = findViewById(R.id.but3);
+        Button div = findViewById(R.id.but4);
+        Button mod = findViewById(R.id.but5);
+
+        add.setOnClickListener(view -> {
+            double a = Double.parseDouble(n1.getText().toString());
+            double b = Double.parseDouble(n2.getText().toString());
+            double c = a + b;
+            r.setText(Double.toString(c));
+        });
+
+        sub.setOnClickListener(view -> {
+            double a = Double.parseDouble(n1.getText().toString());
+            double b = Double.parseDouble(n2.getText().toString());
+            double c = a - b;
+            r.setText(Double.toString(c));
+        });
+
+        mul.setOnClickListener(view -> {
+            double a = Double.parseDouble(n1.getText().toString());
+            double b = Double.parseDouble(n2.getText().toString());
+            double c = a * b;
+            r.setText(Double.toString(c));
+        });
+
+        div.setOnClickListener(view -> {
+            double a = Double.parseDouble(n1.getText().toString());
+            double b = Double.parseDouble(n2.getText().toString());
+            double c = a / b;
+            r.setText(Double.toString(c));
+        });
+
+        mod.setOnClickListener(view -> {
+            double a = Double.parseDouble(n1.getText().toString());
+            double b = Double.parseDouble(n2.getText().toString());
+            double c = a % b;
+            r.setText(Double.toString(c));
+        });
+    }
+}
+
+
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/num1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter first number" />
+
+    <EditText
+        android:id="@+id/num2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter second number" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="3">
+
+        <Button
+            android:id="@+id/but1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/but2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Subtract" />
+
+        <Button
+            android:id="@+id/but3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Multiply" />
+
+        <Button
+            android:id="@+id/but4"
+            android_layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Divide" />
+
+        <Button
+            android:id="@+id/but5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modulo" />
+    </GridLayout>
+
+    <EditText
+        android:id="@+id/res"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:hint="Result" />
+
+</LinearLayout>
